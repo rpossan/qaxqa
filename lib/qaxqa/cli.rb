@@ -1,6 +1,7 @@
 require 'thor'
 
 module Qaxqa
+  # Module to supports CLI commands
   class CLI < Thor
 
 	desc "migrate INPUT", "Migrate folder or XML file to spreadsheet format"
