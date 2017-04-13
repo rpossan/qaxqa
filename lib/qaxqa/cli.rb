@@ -1,16 +1,19 @@
 require 'thor'
 
 module Qaxqa
-  class CommandsInterface < Thor
-    desc "migrate INPUT", "Migrate folder or XML file to spreadsheet format"
-    long_desc <<-HELLO_WORLD
+  class CLI < Thor
 
-    `migrate INPUT` Migrate a file or folder with XML files exported from TesLink to spreadsheet HP Quality Center format.
-    
-    HELLO_WORLD
-    option :upcase
+	desc "migrate INPUT", "Migrate folder or XML file to spreadsheet format"
+	long_desc <<-D
+
+	`migrate INPUT` Migrate a file or folder with XML files exported from TesLink to spreadsheet HP Quality Center format.
+
+	D
+	option :format
     def migrate(input)
-      
+      require "qaxqa/cli/migrate"
+      Migrate.new.run(input)
     end
   end
+
 end

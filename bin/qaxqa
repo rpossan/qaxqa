@@ -2,4 +2,4 @@
 
 require 'qaxqa'
 
-Qaxqa::CommandsInterface.start( ARGV )
+Qaxqa::CLI.start( ARGV )
