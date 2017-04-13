@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'qaxqa'
+
+Qaxqa::CommandsInterface.start( ARGV )
