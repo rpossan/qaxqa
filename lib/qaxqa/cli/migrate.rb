@@ -7,6 +7,7 @@ module Qaxqa
     		validate_param input
     		files = supported_files_from input
     		files.each { |f| format! f }
+    		true
     	end
 
     	private
