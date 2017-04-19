@@ -6,9 +6,22 @@ module Qaxqa
     	def run(input)
     		validate_param input
     		files = supported_files_from input
+    		files.each { |f| format! f }
     	end
 
     	private
+    	def format!(path)
+    		convert_entities! path
+		end
+
+    	def convert_entities!(path)
+    		require 'htmlentities'
+    		content = File.read(path)
+    		content = HTMLEntities.new.decode content
+    		file = File.open(path, "w") { |f| f.write content }
+			true
+		end
+
     	def supported_files_from(input)
     		supported_files = []
     		if File.directory?(input)
