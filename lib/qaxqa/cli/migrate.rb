@@ -47,7 +47,7 @@ module Qaxqa
         end
 
         def file_or_dir_present?(p)
-            File.directory?(p) || File.exists?(p)
+            File.directory?(p) || File.exist?(p)
         end
     end
 end
