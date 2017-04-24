@@ -22,7 +22,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+$qaxqa migrate [FILE PATH OR DIRECTORY]
+
+This command will process a file or set of file from a directory in the format XML so parse and output formatted XLS output file to be imported on HP Quality Center.
 
 ## Development
 
