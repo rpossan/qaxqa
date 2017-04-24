@@ -1,8 +1,7 @@
 # Qaxqa [![Build Status](https://travis-ci.org/rpossan/qaxqa.svg?branch=master)](https://travis-ci.org/rpossan/qaxqa) [![Code Climate](https://codeclimate.com/github/rpossan/qaxqa/badges/gpa.svg)](https://codeclimate.com/github/rpossan/qaxqa)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/qaxqa`. To experiment with that code, run `bin/console` for an interactive prompt.
+This a Ruby gem that helps to convert output exported from TestLink to a valid formatted input to HP Quality Center.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -21,10 +20,10 @@ Or install it yourself as:
     $ gem install qaxqa
 
 ## Usage
-
-$qaxqa migrate [FILE PATH OR DIRECTORY]
-
-This command will process a file or set of file from a directory in the format XML so parse and output formatted XLS output file to be imported on HP Quality Center.
+1. Put a file or files exported from Teslink (XML Files) into a directory
+2. Execute the command line:
+  $qaxqa migrate [FILE PATH OR DIRECTORY]
+3. The output files are in the folder where you run the command. Import these files (XLS) into HP Quality Center.
 
 ## Development
 
