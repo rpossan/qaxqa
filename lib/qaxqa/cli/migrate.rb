@@ -6,21 +6,52 @@ module Qaxqa
         def run(input)
             validate_param input
             files = supported_files_from input
-            files.each { |f| format! f }
-            true
+            files.each { |f| convert_entities! f; to_hpqc! f }
         end
 
         private
-        def format!(path)
-            convert_entities! path
+
+        def to_hpqc!(file)
+            require "rubyXL"
+            workbook = RubyXL::Workbook.new
+            worksheet = workbook.worksheets[0]
+            set_header! worksheet
+
+            workbook.write("spec/output.xlsx")
+        end
+
+        def set_header!(ws)
+            ws.add_cell(0, 0, "Subject")
+            ws.add_cell(0, 1, "Test Name")
+            ws.add_cell(0, 2, "Description")
+            ws.add_cell(0, 3, "preconditions")
+            ws.add_cell(0, 4, "step_number")
+            ws.add_cell(0, 5, "actions")
+            ws.add_cell(0, 6, "expectedresults")
+            ws.add_cell(0, 7, "Type")
+            ws.sheet_data[0][0].change_font_bold(true)
+            ws.sheet_data[0][1].change_font_bold(true)
+            ws.sheet_data[0][2].change_font_bold(true)
+            ws.sheet_data[0][3].change_font_bold(true)
+            ws.sheet_data[0][4].change_font_bold(true)
+            ws.sheet_data[0][5].change_font_bold(true)
+            ws.sheet_data[0][6].change_font_bold(true)
+            ws.sheet_data[0][7].change_font_bold(true)
+            ws.change_column_width(0, 50)
+            ws.change_column_width(1, 70)
+            ws.change_column_width(2, 70)
+            ws.change_column_width(3, 70)
+            ws.change_column_width(4, 70)
+            ws.change_column_width(5, 70)
+            ws.change_column_width(6, 70)
+            ws.change_column_width(7, 70)
         end
 
         def convert_entities!(path)
             require 'htmlentities'
             content = File.read(path)
             content = HTMLEntities.new.decode content
-            file = File.open(path, "w") { |f| f.write content }
-            true
+            File.open(path, "w") { |f| f.write content }
         end
 
         def supported_files_from(input)
@@ -43,7 +74,6 @@ module Qaxqa
 
         def validate_param(input)
             fail "File or directory does not exists!" unless file_or_dir_present? input
-            true
         end
 
         def file_or_dir_present?(p)

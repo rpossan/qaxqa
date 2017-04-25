@@ -32,6 +32,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "thor"
   spec.add_dependency "htmlentities"
+  spec.add_dependency "nokogiri"
+  spec.add_dependency "rubyXL"
   
   # Development
   spec.add_development_dependency "simplecov"
