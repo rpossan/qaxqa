@@ -1,26 +1,36 @@
 require 'byebug'
+require 'qaxqa/testsuite'
 module Qaxqa
     # Migrate given xml files and outputs to XLS HP Quality Center format
     class CLI::Migrate
 
         def run(input)
             validate_param input
+            require 'rubyXL'
             files = supported_files_from input
-            files.each { |f| convert_entities! f; to_hpqc! f }
+            files.each { |f| convert_entities f; to_hpqc f }
         end
 
         private
 
-        def to_hpqc!(file)
-            require "rubyXL"
+        def to_hpqc(file)
+            data = extract file
+
             workbook = RubyXL::Workbook.new
             worksheet = workbook.worksheets[0]
-            set_header! worksheet
+            set_header worksheet
+            data = extract file
 
             workbook.write("spec/output.xlsx")
         end
 
-        def set_header!(ws)
+        def extract(xml)
+            suite = Testsuite.new
+            suite.fetch! xml
+            byebug
+        end
+
+        def set_header(ws)
             ws.add_cell(0, 0, "Subject")
             ws.add_cell(0, 1, "Test Name")
             ws.add_cell(0, 2, "Description")
@@ -47,7 +57,7 @@ module Qaxqa
             ws.change_column_width(7, 70)
         end
 
-        def convert_entities!(path)
+        def convert_entities(path)
             require 'htmlentities'
             content = File.read(path)
             content = HTMLEntities.new.decode content
