@@ -14,18 +14,17 @@ module Qaxqa
         private
 
         def to_hpqc(file)
-            data = extract file
+            extract file
 
             workbook = RubyXL::Workbook.new
             worksheet = workbook.worksheets[0]
             set_header worksheet
-            data = extract file
 
             workbook.write("spec/output.xlsx")
         end
 
         def extract(xml)
-            all = AllSuite.new(xml)
+            AllSuite.new(xml)
         end
 
         def set_header(ws)
