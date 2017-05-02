@@ -1,5 +1,5 @@
 require 'byebug'
-require 'qaxqa/testsuite'
+require 'qaxqa/all_suite'
 module Qaxqa
     # Migrate given xml files and outputs to XLS HP Quality Center format
     class CLI::Migrate
@@ -25,9 +25,7 @@ module Qaxqa
         end
 
         def extract(xml)
-            suite = Testsuite.new
-            suite.fetch! xml
-            byebug
+            all = AllSuite.new(xml)
         end
 
         def set_header(ws)

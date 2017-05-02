@@ -1,22 +1,20 @@
-require "qaxqa/testcase"
 module Qaxqa
 	
-	# Module class to set XML parsed attributes
+	# Module class to set XML parsed attributes to a suitecase object
 	class Testsuite
 
-		attr_accessor :testcases
+		attr_accessor :subject, :test_name
 
-		def fetch!(path)
-			require 'nokogiri'
-			doc = Nokogiri::XML(File.open(path))
-			self.testcases = []
-			doc.xpath("//testcase").each do |tc|
-				self.testcases << Testcase.new(tc)
-			end
+		def initialize(doc = nil)
+			parse! doc unless doc.nil?
+		end
 
+		private
+
+		def parse!(doc)
+			@subject = doc.xpath("//testsuite/testsuite").first.attributes["name"].value
 		end
 
 	end
 
 end
-
