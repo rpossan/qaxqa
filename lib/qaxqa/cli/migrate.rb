@@ -19,20 +19,25 @@ module Qaxqa
             worksheet = workbook.worksheets[0]
             set_header worksheet
             line = 0
-            suites.testsuites.each_with_index do |s, idx|
+            suites.testsuites.each_with_index do |s|
                 line += 1
                 worksheet.add_cell(line, 0, s.subject)
                 worksheet.add_cell(line, 1, s.test_name)
                 worksheet.add_cell(line, 2, s.details)
-                s.testcases.each_with_index do |tc, tc_idx|
-                    line += 1
-                    worksheet.add_cell(line, 0, tc.subject)
-                    worksheet.add_cell(line, 1, tc.test_name)
-                    worksheet.add_cell(line, 2, tc.summary)
-                    worksheet.add_cell(line, 3, tc.preconditions)
+                s.testcases.each_with_index do |tc|
+                    tc.steps.each_with_index do |step|
+                        line +=1
+                        worksheet.add_cell(line, 0, tc.subject)
+                        worksheet.add_cell(line, 1, tc.test_name)
+                        worksheet.add_cell(line, 2, tc.summary)
+                        worksheet.add_cell(line, 3, tc.preconditions)
+                        worksheet.add_cell(line, 4, step.step_number)
+                        worksheet.add_cell(line, 5, step.actions)
+                        worksheet.add_cell(line, 6, step.expectedresults)
+                        worksheet.add_cell(line, 7, tc.test_type)
+                    end
                 end
             end
-
             workbook.write("output.xlsx")
         end
 

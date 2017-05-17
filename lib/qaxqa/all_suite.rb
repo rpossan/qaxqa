@@ -1,5 +1,7 @@
 require "qaxqa/testcase"
 require "qaxqa/testsuite"
+require "qaxqa/step"
+
 module Qaxqa
 	
 	# Module class to set XML parsed attributes
@@ -18,7 +20,6 @@ module Qaxqa
 		def fetch!(path)
 			require 'nokogiri'
 			@doc = Nokogiri::XML(File.open(path))
-			#byebug
 
 			@testsuites = Testsuite.parse(@doc)
 		end
