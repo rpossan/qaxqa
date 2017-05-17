@@ -43,8 +43,6 @@ module Qaxqa
 			return suites
 		end
 
-		private
-
 	end
 
 end
