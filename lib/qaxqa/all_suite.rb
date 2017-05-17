@@ -18,9 +18,9 @@ module Qaxqa
 		def fetch!(path)
 			require 'nokogiri'
 			@doc = Nokogiri::XML(File.open(path))
-			@doc.xpath("//testsuite/testsuite/testsuite").each do |suite|
-				@testsuites << Testsuite.new(suite)
-			end
+			#byebug
+
+			@testsuites = Testsuite.parse(@doc)
 		end
 
 	end

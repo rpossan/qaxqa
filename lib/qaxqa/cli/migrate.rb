@@ -14,13 +14,26 @@ module Qaxqa
         private
 
         def to_hpqc(file)
-            extract file
-
+            suites = extract file
             workbook = RubyXL::Workbook.new
             worksheet = workbook.worksheets[0]
             set_header worksheet
+            line = 0
+            suites.testsuites.each_with_index do |s, idx|
+                line += 1
+                worksheet.add_cell(line, 0, s.subject)
+                worksheet.add_cell(line, 1, s.test_name)
+                worksheet.add_cell(line, 2, s.details)
+                s.testcases.each_with_index do |tc, tc_idx|
+                    line += 1
+                    worksheet.add_cell(line, 0, tc.subject)
+                    worksheet.add_cell(line, 1, tc.test_name)
+                    worksheet.add_cell(line, 2, tc.summary)
+                    worksheet.add_cell(line, 3, tc.preconditions)
+                end
+            end
 
-            workbook.write("spec/output.xlsx")
+            workbook.write("output.xlsx")
         end
 
         def extract(xml)
