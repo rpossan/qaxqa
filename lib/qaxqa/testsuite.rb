@@ -15,7 +15,7 @@ module Qaxqa
 			testsuite.xpath("./testcase").each do |tc|
 				testcase = Testcase.new
 				testcase.steps = []
-				testcase.subject = suite.subject
+				testcase.subject = "-"
 				testcase.test_name = tc.attributes["name"].value
 				testcase.summary = tc.xpath("./summary").text
 				testcase.preconditions = tc.xpath("./preconditions").text
