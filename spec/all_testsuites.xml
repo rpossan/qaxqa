@@ -282,11 +282,12 @@
 <node_order><![CDATA[2]]></node_order>
 <details><![CDATA[<p> Fluxo dos tipos 10,20,30 e 40</p>]]> 
 </details>
-<testcase internalid="226417" name="Fluxo Básico da Exportação do Tipo 10">
+<testcase internalid="226417" name="Fluxo Básico da Exportação do Tipo 10 - Exportação Venda Normal">
 	<node_order><![CDATA[0]]></node_order>
 	<externalid><![CDATA[215]]></externalid>
 	<version><![CDATA[1]]></version>
-	<summary><![CDATA[<p> Executar os testes do documento em anexo.</p>]]></summary>
+	<summary><![CDATA[<p> Executar os testes do documento em anexo.</p>
+<p>Exportação de Venda Normal</p>]]></summary>
 	<preconditions><![CDATA[<p> Ter a base consfigurada para integração Import x Export x RegInt.</p>]]></preconditions>
 	<execution_type><![CDATA[1]]></execution_type>
 	<importance><![CDATA[2]]></importance>
@@ -298,7 +299,7 @@
 	</custom_field>
 </custom_fields></testcase>
 
-<testcase internalid="226419" name="Fluxo Básico da Exportação do Tipo 20">
+<testcase internalid="226419" name="Fluxo Básico da Exportação do Tipo 20 - Reexportação">
 	<node_order><![CDATA[1]]></node_order>
 	<externalid><![CDATA[216]]></externalid>
 	<version><![CDATA[1]]></version>
@@ -314,7 +315,7 @@
 	</custom_field>
 </custom_fields></testcase>
 
-<testcase internalid="226422" name="Fluxo Básico da Exportação do Tipo 30">
+<testcase internalid="226422" name="Fluxo Básico da Exportação do Tipo 30 - Exportação Temporária sem Transformação">
 	<node_order><![CDATA[2]]></node_order>
 	<externalid><![CDATA[217]]></externalid>
 	<version><![CDATA[1]]></version>
@@ -330,7 +331,7 @@
 	</custom_field>
 </custom_fields></testcase>
 
-<testcase internalid="226424" name="Fluxo Básico da Exportação do Tipo 40">
+<testcase internalid="226424" name="Fluxo Básico da Exportação do Tipo 40 - Venda da Exportação Temporária">
 	<node_order><![CDATA[3]]></node_order>
 	<externalid><![CDATA[218]]></externalid>
 	<version><![CDATA[1]]></version>
@@ -57464,7 +57465,7 @@ PT-BR;mso-bidi-language:AR-SA">O relatório de CTIT impresso (gerado em excel), 
 <p>Usar a planilha para ajudar a validar os calculos.</p>
 <p>Baixa<br />
 <br />
-20(saldo DI) - 1644 (1620 Consumo total normal + 24 perda intagivel total)</p>
+20(saldo DI disponivel ou saldo necessário para consumo) - 1644 (1620 Consumo total normal + 24 perda intagivel total)</p>
 <p>20 - 1644<br />
 x - 1620<br />
 <br />
@@ -57492,7 +57493,7 @@ x = 19,708<br />
 	<actions><![CDATA[<p>No campo "Número Documento de Exportação" preenhcer com o numero do  Processo//Invoice criado anteriormente, clicar em "Executa Consulta" e validar se a quantidades de pendencias estão corretas.</p>
 <p>Pendencia <br />
 <br />
-1644 - 100,29 (pendencia de consumo normal)<br />
+1620(apenas qtde consumo normal) - 100,29 (pendencia de consumo normal)<br />
 24 - x<br />
 <br />
 1644 x = 100,29 * 24<br />
@@ -58036,7 +58037,7 @@ x = 1,464</p>
 	<node_order><![CDATA[9]]></node_order>
 	<externalid><![CDATA[494]]></externalid>
 	<version><![CDATA[1]]></version>
-	<summary><![CDATA[<p>Validar se a baixa sem o consumo proporcional não hpuve impacto, cenário na aba escenario 1  da planilha de cenários da estória</p>
+	<summary><![CDATA[<p>Validar se a baixa sem o consumo proporcional não houve impacto, cenário na aba escenario 1  da planilha de cenários da estória</p>
 <ol class="aui-nav aui-nav-breadcrumbs __skate" style="margin: 0px; list-style: none; padding: 0px; color: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(245, 245, 245);">
     <li style="list-style: none; margin: 0px; padding: 0px 10px; position: relative; display: inline;"><a class="issue-link" data-issue-key="OSGTG-10976" href="http://ent.jira.int.thomsonreuters.com/browse/OSGTG-10976" id="key-val" rel="963043" style="color: rgb(59, 115, 175); text-decoration: underline;">OSGTG-10976</a> no jira.</li>
 </ol>]]></summary>

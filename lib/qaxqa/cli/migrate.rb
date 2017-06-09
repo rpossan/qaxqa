@@ -1,4 +1,3 @@
-require 'byebug'
 require 'qaxqa/all_suite'
 module Qaxqa
     # Migrate given xml files and outputs to XLS HP Quality Center format
@@ -13,6 +12,23 @@ module Qaxqa
 
         private
 
+        def insert_cases(ws, cases, line)
+            cases.each_with_index do |tc|
+                tc.steps.each_with_index do |step|
+                    line +=1
+                    ws.add_cell(line, 0, tc.subject)
+                    ws.add_cell(line, 1, tc.test_name)
+                    ws.add_cell(line, 2, tc.summary)
+                    ws.add_cell(line, 3, tc.preconditions)
+                    ws.add_cell(line, 4, step.step_number)
+                    ws.add_cell(line, 5, step.actions)
+                    ws.add_cell(line, 6, step.expectedresults)
+                    ws.add_cell(line, 7, tc.test_type)
+                end
+            end
+            return line
+        end
+
         def to_hpqc(file)
             suites = extract file
             workbook = RubyXL::Workbook.new
@@ -20,23 +36,20 @@ module Qaxqa
             set_header worksheet
             line = 0
             suites.testsuites.each_with_index do |s|
+                subject_name = s.subject
                 line += 1
-                worksheet.add_cell(line, 0, s.subject)
-                worksheet.add_cell(line, 1, s.test_name)
-                worksheet.add_cell(line, 2, s.details)
-                s.testcases.each_with_index do |tc|
-                    tc.steps.each_with_index do |step|
-                        line +=1
-                        worksheet.add_cell(line, 0, tc.subject)
-                        worksheet.add_cell(line, 1, tc.test_name)
-                        worksheet.add_cell(line, 2, tc.summary)
-                        worksheet.add_cell(line, 3, tc.preconditions)
-                        worksheet.add_cell(line, 4, step.step_number)
-                        worksheet.add_cell(line, 5, step.actions)
-                        worksheet.add_cell(line, 6, step.expectedresults)
-                        worksheet.add_cell(line, 7, tc.test_type)
+                if s.testsuites.size > 0
+                    s.testsuites.each do |ss|
+                        worksheet.add_cell(line, 0, subject_name)
+                        worksheet.add_cell(line, 1, ss.test_name)
+                        worksheet.add_cell(line, 2, ss.details)
+                        line = insert_cases(worksheet, ss.testcases, line) if ss.testcases.size > 0
                     end
                 end
+                worksheet.add_cell(line, 0, subject_name)
+                worksheet.add_cell(line, 1, s.test_name)
+                worksheet.add_cell(line, 2, s.details)
+                line = insert_cases(worksheet, s.testcases, line) if s.testcases.size > 0
             end
             workbook.write("output.xlsx")
         end
