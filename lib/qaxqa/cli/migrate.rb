@@ -14,6 +14,7 @@ module Qaxqa
 
         def insert_cases(ws, cases, line)
             cases.each_with_index do |tc|
+                start_line = line + 1
                 tc.steps.each_with_index do |step|
                     line +=1
                     ws.add_cell(line, 0, tc.subject)
@@ -25,6 +26,11 @@ module Qaxqa
                     ws.add_cell(line, 6, step.expectedresults)
                     ws.add_cell(line, 7, tc.test_type)
                 end
+                ws.merge_cells(start_line, 0, line, 0)
+                ws.merge_cells(start_line, 1, line, 1)
+                ws.merge_cells(start_line, 2, line, 2)
+                ws.merge_cells(start_line, 3, line, 3)
+                ws.merge_cells(start_line, 7, line, 7)
             end
             return line
         end
