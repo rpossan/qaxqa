@@ -1,6 +1,7 @@
 module Qaxqa
 	
 	# Module class to set XML parsed attributes to a suitecase object
+	#require "byebug"
 	class Testsuite
 
 		attr_accessor :subject, :test_name, :details, :testcases, :testsuites
@@ -15,7 +16,7 @@ module Qaxqa
 			testsuite.xpath("./testcase").each do |tc|
 				testcase = Testcase.new
 				testcase.steps = []
-				testcase.subject = "-"
+				testcase.subject = testsuite.attributes["name"].value
 				testcase.test_name = tc.attributes["name"].value
 				testcase.summary = tc.xpath("./summary").text
 				testcase.preconditions = tc.xpath("./preconditions").text
